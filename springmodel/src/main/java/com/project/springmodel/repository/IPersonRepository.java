@@ -7,4 +7,7 @@ import java.util.List;
 public interface IPersonRepository extends Repository<Person, Long> {
     List<Person> findByFatherLastName(String fatherLastName);
     Person findByFirstName(String firstName);
+    void save(Person person);
+    void delete(Person person);
+    Person findById(int id);
 }

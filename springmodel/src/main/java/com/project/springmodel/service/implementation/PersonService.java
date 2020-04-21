@@ -11,10 +11,13 @@ import com.project.springmodel.repository.IPersonRepository;
 import com.project.springmodel.repository.IStudentRepository;
 import com.project.springmodel.service.IPersonService;
 import com.project.springmodel.transversal.Response;
+import org.apache.tomcat.jni.Local;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,7 @@ public class PersonService implements IPersonService {
     }
 
     @Override
+    @Transactional
     public Response<List<Person>> findByFatherLastName(String fatherLastName) {
         Response<List<Person>> response = new Response<>();
 
@@ -42,6 +46,31 @@ public class PersonService implements IPersonService {
 
             return response;
         }
+
+        PersonDto createPerson = new PersonDto();
+        createPerson.setFirstName("Jesus");
+        createPerson.setFatherLastName("Telles");
+        createPerson.setMotherLastName("Rosas");
+        createPerson.setDocument("73676444");
+        createPerson.setEmail("jesusa@gmail.com");
+        createPerson.setMobile("994518205");
+        createPerson.setSex(false);
+        createPerson.setTelephone("5577078");
+        createPerson.setBirthDate(LocalDate.of(1950, 12, 25));
+
+        Person createPersonEntity = modelMapper.map(createPerson, Person.class);
+        createPersonEntity.setUserRegister("wgutierrez");
+
+        // INSERT
+        this.personRepository.save(createPersonEntity);
+
+        createPersonEntity.setEmail("eugenia@gmail.com");
+
+        // UPDATE
+        this.personRepository.save(createPersonEntity);
+
+        //DELETE
+        //this.personRepository.delete(createPersonEntity);
 
         //int test = 1/ 0;
 
