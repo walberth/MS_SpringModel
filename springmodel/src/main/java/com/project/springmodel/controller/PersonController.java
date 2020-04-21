@@ -1,6 +1,6 @@
 package com.project.springmodel.controller;
 
-import com.project.springmodel.model.Person;
+import com.project.springmodel.entity.Person;
 import com.project.springmodel.service.IPersonService;
 import com.project.springmodel.transversal.Response;
 import org.springframework.beans.factory.annotation.Autowired;

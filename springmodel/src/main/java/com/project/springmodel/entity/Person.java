@@ -1,10 +1,9 @@
-package com.project.springmodel.model;
+package com.project.springmodel.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,7 +20,7 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int Id;
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -37,12 +36,6 @@ public class Person implements Serializable {
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
-
-    @Column(name = "person_type_id")
-    private int idPersonType;
-
-    @Column(name = "document_type_id")
-    private int idDocumentType;
 
     @Column(name = "document")
     private String document;
@@ -62,10 +55,16 @@ public class Person implements Serializable {
     @Column(name = "time_stamp")
     private LocalDateTime timeStamp;
 
+    @OneToOne
+    private Attorney attorney;
+
+    @OneToOne
+    private Student student;
+
     @Override
     public String toString() {
         return "Person{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", FirstName='" + firstName + '\'' +
                 ", FatherLastName='" + fatherLastName + '\'' +
                 ", MotherLastName='" + motherLastName + '\'' +
